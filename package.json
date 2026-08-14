@@ -1,0 +1,11 @@
+{
+  "name": "mouse-finder-icon-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate-icon": "node tools/generate-icon.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}
