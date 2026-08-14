@@ -4,10 +4,16 @@ A tiny, dependency-free Windows tray app inspired by macOS's “shake mouse poin
 
 ![Mouse Finder icon](MouseFinder-preview.png)
 
+## Download
+
+[**Download MouseFinder.exe for Windows x64**](https://github.com/jampakdd/MouseFinder/releases/latest/download/MouseFinder.exe)
+
+Download the single executable and run it—there is no installer and no separate .NET download. Windows SmartScreen may ask you to confirm running an unsigned community-built app. Right-click its tray icon for settings or to exit.
+
 ## Requirements
 
 - Windows 10 or Windows 11 (x64)
-- .NET 10 SDK to build and install
+- .NET 10 SDK only if building from source
 
 ## Install and run at startup
 
@@ -22,6 +28,17 @@ That builds one small executable in `app\`, adds a shortcut to your Windows Star
 The icon is already included. To regenerate it from `MouseFinder.svg`, install the optional Node development dependency and run `npm run generate-icon`.
 
 To remove it, exit Mouse Finder from its tray menu and delete `Mouse Finder.lnk` from `shell:startup`.
+
+## Settings
+
+Right-click the Mouse Finder tray icon and choose **Settings…** (or double-click the icon). The panel lets you tune:
+
+- Trigger time, minimum screen-distance span, and direction-reversal count
+- Maximum cursor scale and grow/shrink animation durations
+- Shrink-speed threshold and stop-jiggling timeout
+- Cooldown before a new shake can trigger
+
+Settings are saved to `%LOCALAPPDATA%\MouseFinder\settings.json`. **Reset defaults** restores the tuned values shipped with the app.
 
 ## Notes
 

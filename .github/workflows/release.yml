@@ -1,0 +1,43 @@
+name: Release Windows executable
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Build self-contained executable
+        shell: pwsh
+        run: >-
+          dotnet publish .\MouseFinder.csproj
+          -c Release
+          -r win-x64
+          --self-contained true
+          -p:PublishSingleFile=true
+          -p:EnableCompressionInSingleFile=true
+          -p:DebugType=None
+          -p:DebugSymbols=false
+          -o .\dist
+
+      - name: Create GitHub release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create $env:GITHUB_REF_NAME
+          .\dist\MouseFinder.exe
+          --repo $env:GITHUB_REPOSITORY
+          --title "Mouse Finder $env:GITHUB_REF_NAME"
+          --generate-notes
